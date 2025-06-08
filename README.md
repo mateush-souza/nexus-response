@@ -564,8 +564,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **Desenvolvido com ❤️ para um mundo mais seguro**
 
-[🌟 Star no GitHub](https://github.com/seu-usuario/nexus-response) | 
-[📖 Documentação Completa](https://docs.nexusresponse.com) | 
-[🚀 Demo Live](https://demo.nexusresponse.com)
-
 </div>
