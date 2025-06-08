@@ -523,6 +523,35 @@ docker-compose up -d
 ### Canais de Suporte
 
 - 📧 **Email**: rm558424@fiap.com.br
+- Devs:
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/cashot01">
+        <img src="https://avatars.githubusercontent.com/u/110852153?v=4" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <sub>
+          <b>Cauan Schot</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/lucasdafialho">
+        <img src="https://avatars.githubusercontent.com/u/169506214?v=4" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
+        <sub>
+          <b>Lucas Fialho</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/mateush-souza">
+        <img src="https://avatars.githubusercontent.com/u/132921139?v=4" width="100px;" alt="Foto do Steve Jobs"/><br>
+        <sub>
+          <b>Mateus Henrique</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 
 ## 📄 Licença
