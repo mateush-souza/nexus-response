@@ -212,7 +212,6 @@ nexus-response/
 │   ├── Repository.cs
 │   ├── IUnitOfWork.cs
 │   └── UnitOfWork.cs
-├── 📁 Tests/                # Testes unitários e integração
 └── 📄 Program.cs           # Ponto de entrada da aplicação
 ```
 
@@ -249,16 +248,22 @@ Edite o arquivo `appsettings.json`:
 
 ```json
 {
-  "ConnectionStrings": {
-    "OracleConnection": "DATA SOURCE=localhost:1521/XEPDB1;USER ID=nexus_user;PASSWORD=nexus_password;"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "Swagger": {
+        "Description": "An application responsible for 2TDSPG document generation",
+        "Title": "NEXUS RESPONSE - GLOBAL SOLUTION",
+        "Email": "rm558422@fiap.com.br",
+        "Name": "Nexus Response"
+    },
+    "ConnectionStrings": {
+        "Oracle": "Data Source=oracle.fiap.com.br:1521/orcl;User ID=XXXXXX;Password=XXXXXX;"
     }
-  },
-  "AllowedHosts": "*"
 }
 ```
 
@@ -272,7 +277,7 @@ dotnet restore
 dotnet tool install --global dotnet-ef
 ```
 
-### 4. Migrações do Banco de Dados
+### 4. Migrações do Banco de Dados - caso crie do zero
 
 ```bash
 # Criar migração inicial
@@ -335,86 +340,6 @@ dotnet watch run
 ### Swagger/OpenAPI
 
 Acesse a documentação interativa em: `http://localhost:5000/swagger`
-
-## 🧪 Testes
-
-### Estrutura de Testes
-
-O projeto inclui testes abrangentes organizados em:
-
-```
-Tests/
-├── 📁 UnitTests/
-│   ├── Controllers/
-│   ├── Services/
-│   └── Repositories/
-├── 📁 IntegrationTests/
-│   ├── API/
-│   └── Database/
-└── 📁 TestData/
-    └── SeedData/
-```
-
-### Executar Testes
-
-```bash
-# Executar todos os testes
-dotnet test
-
-# Executar com cobertura de código
-dotnet test --collect:"XPlat Code Coverage"
-
-# Executar testes específicos
-dotnet test --filter "Category=Unit"
-dotnet test --filter "Category=Integration"
-
-# Executar com verbosidade detalhada
-dotnet test --logger "console;verbosity=detailed"
-```
-
-### Exemplos de Teste
-
-#### Teste Unitário - Controller
-
-```csharp
-[Test]
-public async Task GetAllIncidents_ReturnsOkResult_WithIncidentList()
-{
-    // Arrange
-    var incidents = new List<Incident> { /* dados de teste */ };
-    _mockRepository.Setup(r => r.GetAllAsync()).ReturnsAsync(incidents);
-
-    // Act
-    var result = await _controller.GetAllIncidents();
-
-    // Assert
-    Assert.IsType<OkObjectResult>(result);
-    var okResult = result as OkObjectResult;
-    Assert.IsType<List<IncidentDto>>(okResult.Value);
-}
-```
-
-#### Teste de Integração - API
-
-```csharp
-[Test]
-public async Task PostIncident_ValidData_ReturnsCreated()
-{
-    // Arrange
-    var incident = new CreateIncidentDto
-    {
-        Title = "Teste de Incidente",
-        Description = "Descrição do teste",
-        Severity = "High"
-    };
-
-    // Act
-    var response = await _client.PostAsJsonAsync("/api/Incident/manual", incident);
-
-    // Assert
-    Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-}
-```
 
 ## 🔧 Exemplos de Uso
 
@@ -585,16 +510,6 @@ docker run -d -p 8080:80 --name nexus-response-app nexus-response
 docker-compose up -d
 ```
 
-## 🤝 Contribuição
-
-### Como Contribuir
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
 ### Padrões de Código
 
 - **C# Style Guide**: Seguir convenções Microsoft
@@ -602,60 +517,17 @@ docker-compose up -d
 - **Documentation**: XML documentation para APIs públicas
 - **Testing**: Mínimo 80% de cobertura de código
 
-### Code Review
-
-Todos os PRs passam por revisão automatizada:
-- ✅ Build success
-- ✅ Testes unitários
-- ✅ Análise de código (SonarQube)
-- ✅ Verificação de segurança
-
-## 📋 Roadmap
-
-### Versão 2.0 (Q2 2024)
-- [ ] Integração com Azure IoT Hub
-- [ ] Machine Learning para predição de incidentes
-- [ ] Notificações push em tempo real
-- [ ] API GraphQL
-
-### Versão 2.1 (Q3 2024)
-- [ ] Dashboard mobile nativo
-- [ ] Integração com sistemas externos
-- [ ] Relatórios avançados
-- [ ] Audit trail completo
 
 ## 📞 Suporte
 
 ### Canais de Suporte
 
-- 📧 **Email**: suporte@nexusresponse.com
-- 💬 **Discord**: [Servidor da Comunidade](https://discord.gg/nexusresponse)
-- 📖 **Documentação**: [Wiki do Projeto](https://github.com/seu-usuario/nexus-response/wiki)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/seu-usuario/nexus-response/issues)
+- 📧 **Email**: rm558424@fiap.com.br
 
-### FAQ
-
-**Q: Como configurar para usar SQL Server ao invés do Oracle?**
-A: Modifique a string de conexão em `appsettings.json` e instale o pacote `Microsoft.EntityFrameworkCore.SqlServer`.
-
-**Q: A aplicação suporta múltiplos tenants?**
-A: Atualmente não, mas está no roadmap para a versão 2.1.
-
-**Q: Como integrar com meu sistema IoT existente?**
-A: Use o endpoint `/api/Incident/iot-data` seguindo o formato JSON documentado.
 
 ## 📄 Licença
 
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 📈 Status do Projeto
-
-- ✅ **API Core**: Completa e funcional
-- ✅ **Autenticação**: JWT implementado
-- ✅ **Testes**: 85% de cobertura
-- ✅ **Documentação**: Swagger/OpenAPI
-- 🔄 **Dashboard**: Em desenvolvimento
-- 🔄 **Mobile App**: Planejado
 
 ---
 
