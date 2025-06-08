@@ -523,7 +523,7 @@ docker-compose up -d
 ### Canais de Suporte
 
 - 📧 **Email**: rm558424@fiap.com.br
-- Devs:
+- 👥 **Devs**:
 <table>
   <tr>
     <td align="center">
